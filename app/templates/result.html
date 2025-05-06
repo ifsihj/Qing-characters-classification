@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>检索结果</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .filter-group {
+            margin-bottom: 20px;
+        }
+        .filter-group select {
+            margin-right: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1 class="my_title">中国清朝历史人物分类检索</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">首页</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>检索结果</h1>
+        <a href="/">返回分面组配</a>
+
+<!-- 分类筛选区域 -->
+<div class="filter-group mb-4">
+    <label for="level1" class="form-label">等级列举式分类</label>
+    <div class="row g-3 align-items-end">
+        <div class="col-md-4">
+            <select id="level1" class="form-select" onchange="updateLevel(this.value)">
+                <option value="">请选择一级分类</option>
+                <option value="皇室成员">皇室成员</option>
+                <option value="政治人物">政治人物</option>
+                <option value="军事人物">军事人物</option>
+                <option value="文化与思想人物">文化与思想人物</option>
+                <option value="经济人物">经济人物</option>
+                <option value="宗教人物">宗教人物</option>
+                <option value="其他重要人物">其他重要人物</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <select id="level2" class="form-select" onchange="updateLevel2(this.value)" disabled>
+                <option value="">请选择二级分类</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <select id="level3" class="form-select" onchange="filterCards()" disabled>
+                <option value="">请选择三级分类</option>
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-outline-secondary mt-3" onclick="resetFilters()">重置筛选</button>
+</div>
+
+        {% if not result.empty %}
+            <div class="card-container" id="results">
+                {% for person in result %}
+                <div class="card" data-category1="{{ person['身份地位'] }}"
+                                 data-category2="{{ person['身份地位详细'] }}"
+                                 data-category3="{{ person['身份地位细分'] }}">
+                    <div class="card-content">
+                        <h3 class="card-title">{{ person['姓名'] }}</h3>
+                        <p class="card-text">性别：{{ person['性别'] }}</p>
+                        <p class="card-text">朝代：{{ person['朝代'] }}</p>
+                        <p class="card-text">地理背景：{{ person['地理背景'] }}</p>
+                        <p class="card-text">思想流派：{{ person['思想流派'] }}</p>
+                        <p class="card-text">社会关系：{{ person['社会关系'] }}</p>
+                        <p class="card-text">备注：{{ person['备注'] }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>没有找到匹配的结果。</p>
+        {% endif %}
+    </div>
+
+    <script>
+        const categoryMap = {
+            "皇室成员": {
+                "皇帝": [],
+                "皇后": [],
+                "皇族": [],
+            },
+            "政治人物": {
+                "中央政府官员": {
+                    "内阁官员": [],
+                    "六部官员": [],
+                    "其他中央机构官员": []
+                },
+                "地方官员": {
+                    "总督": [],
+                    "巡抚": [],
+                    "布政使": [],
+                    "按察使": [],
+                    "道台": [],
+                    "知府": [],
+                    "知州": [],
+                    "知县": []
+                }
+            },
+            "军事人物": {
+                "陆军将领": {
+                    "统兵大将": [],
+                    "营级军官": []
+                },
+                "海军将领": [],
+                "武官": []
+            },
+            "文化与思想人物": {
+                "学者": {
+                    "经学家": [],
+                    "史学家": [],
+                    "文学家": [],
+                    "哲学家": [],
+                    "地理学家": [],
+                    "考古学家": [],
+                    "语言学家": [],
+                    "其他学者": []
+                },
+                "艺术家": {
+                    "书法家": [],
+                    "画家": [],
+                    "音乐家": []
+                },
+                "教育家": [],
+                "科学家": []
+            },
+            "经济人物": {
+                "商人": [],
+                "工业家": [],
+                "财政官员": []
+            },
+            "宗教人物": {
+                "佛教僧侣": [],
+                "道教道士": [],
+                "其他宗教人物": []
+            },
+            "其他重要人物": {
+                "革命家": [],
+                "外交人物": [],
+                "社会活动家": []
+            }
+        };
+
+        function updateLevel(selected) {
+            const level2 = document.getElementById("level2");
+            const level3 = document.getElementById("level3");
+
+            level2.innerHTML = '<option value="">请选择二级分类</option>';
+            level3.innerHTML = '<option value="">请选择三级分类</option>';
+
+            level2.disabled = true;
+            level3.disabled = true;
+
+            if (selected && categoryMap[selected]) {
+                level2.disabled = false;
+                for (let key in categoryMap[selected]) {
+                    let opt = document.createElement("option");
+                    opt.value = key;
+                    opt.text = key;
+                    level2.appendChild(opt);
+                }
+            }
+        }
+
+        function updateLevel2(selected) {
+            const level1 = document.getElementById("level1").value;
+            const level3 = document.getElementById("level3");
+
+            level3.innerHTML = '<option value="">请选择三级分类</option>';
+            level3.disabled = true;
+
+            if (level1 && selected && categoryMap[level1][selected] && typeof categoryMap[level1][selected] === 'object' && !Array.isArray(categoryMap[level1][selected])) {
+                level3.disabled = false;
+                for (let key in categoryMap[level1][selected]) {
+                    let opt = document.createElement("option");
+                    opt.value = key;
+                    opt.text = key;
+                    level3.appendChild(opt);
+                }
+            }
+        }
+
+        // 过滤卡片函数
+        function filterCards() {
+            const level1 = document.getElementById("level1").value.trim();
+            const level2 = document.getElementById("level2").value.trim();
+            const level3 = document.getElementById("level3").value.trim();
+
+            const cards = document.querySelectorAll(".card");
+
+            cards.forEach(card => {
+                const cat1 = card.getAttribute("data-category1") || "";
+                const cat2 = card.getAttribute("data-category2") || "";
+                const cat3 = card.getAttribute("data-category3") || "";
+
+                let match = true;
+
+                if (level1 && !cat1.includes(level1)) match = false;
+                if (level2 && !cat2.includes(level2)) match = false;
+                if (level3 && !cat3.includes(level3)) match = false;
+
+                card.style.display = match ? "block" : "none";
+            });
+        }
+
+        // 监听所有下拉框变化
+        document.querySelectorAll(".filter-group select").forEach(select => {
+            select.addEventListener("change", filterCards);
+        });
+
+    </script>
+</body>
+</html>

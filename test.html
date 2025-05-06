@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清朝历史人物分类表</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        .node {
+            cursor: pointer;
+        }
+        .node circle {
+            fill: #fff;
+            stroke: steelblue;
+            stroke-width: 1.5px;
+        }
+        .node text {
+            font: 10px sans-serif;
+        }
+        path.link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 1.5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="tree"></div>
+    <script>
+        const data = {
+            name: "清朝历史人物",
+            children: [
+                {
+                    name: "皇室成员",
+                    children: [
+                        { name: "皇帝" },
+                        { name: "皇后" },
+                        { name: "皇族" },
+                        { name: "公主" }
+                    ]
+                },
+                {
+                    name: "政治人物",
+                    children: [
+                        { name: "中央政府官员" },
+                        { name: "地方政府官员" }
+                    ]
+                },
+                // 更多分类...
+            ]
+        };
+
+        const width = 96

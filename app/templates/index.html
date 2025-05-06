@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国清朝历史人物分类</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>中国清朝历史人物分类检索</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="current"><a href="/">首页</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h2>搜索历史人物</h2>
+        <form action="/search" method="post">
+            <input type="text" name="name" placeholder="请输入姓名">
+            <button type="submit">搜索</button>
+        </form>
+        <h2>分面筛选</h2>
+        <form action="/filter" method="get">
+            <div class="filter-group">
+                <label>性别：</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="">全部</label>
+                    <label><input type="radio" name="gender" value="男">男</label>
+                    <label><input type="radio" name="gender" value="女">女</label>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label>地理背景：</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="birthplace" value="">全部</label>
+                    <label><input type="radio" name="birthplace" value="北京">北京</label>
+                    <label><input type="radio" name="birthplace" value="天津">天津</label>
+                    <label><input type="radio" name="birthplace" value="上海">上海</label>
+                    <label><input type="radio" name="birthplace" value="重庆">重庆</label>
+                    <label><input type="radio" name="birthplace" value="河北">河北</label>
+                    <label><input type="radio" name="birthplace" value="山西">山西</label>
+                    <label><input type="radio" name="birthplace" value="辽宁">辽宁</label>
+                    <label><input type="radio" name="birthplace" value="吉林">吉林</label>
+                    <label><input type="radio" name="birthplace" value="黑龙江">黑龙江</label>
+                    <label><input type="radio" name="birthplace" value="江苏">江苏</label>
+                    <label><input type="radio" name="birthplace" value="浙江">浙江</label>
+                    <label><input type="radio" name="birthplace" value="安徽">安徽</label>
+                    <label><input type="radio" name="birthplace" value="福建">福建</label>
+                    <label><input type="radio" name="birthplace" value="江西">江西</label>
+                    <label><input type="radio" name="birthplace" value="山东">山东</label>
+                    <label><input type="radio" name="birthplace" value="河南">河南</label>
+                    <label><input type="radio" name="birthplace" value="湖北">湖北</label>
+                    <label><input type="radio" name="birthplace" value="湖南">湖南</label>
+                    <label><input type="radio" name="birthplace" value="广东">广东</label>
+                    <label><input type="radio" name="birthplace" value="海南">海南</label>
+                    <label><input type="radio" name="birthplace" value="四川">四川</label>
+                    <label><input type="radio" name="birthplace" value="贵州">贵州</label>
+                    <label><input type="radio" name="birthplace" value="云南">云南</label>
+                    <label><input type="radio" name="birthplace" value="陕西">陕西</label>
+                    <label><input type="radio" name="birthplace" value="甘肃">甘肃</label>
+                    <label><input type="radio" name="birthplace" value="青海">青海</label>
+                    <label><input type="radio" name="birthplace" value="台湾">台湾</label>
+                    <label><input type="radio" name="birthplace" value="内蒙古">内蒙古</label>
+                    <label><input type="radio" name="birthplace" value="广西">广西</label>
+                    <label><input type="radio" name="birthplace" value="西藏">西藏</label>
+                    <label><input type="radio" name="birthplace" value="宁夏">宁夏</label>
+                    <label><input type="radio" name="birthplace" value="新疆">新疆</label>
+                    <label><input type="radio" name="birthplace" value="香港">香港</label>
+                    <label><input type="radio" name="birthplace" value="澳门">澳门</label>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label>朝代：</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="dynasty" value="">全部</label>
+                    <label><input type="radio" name="dynasty" value="康熙年间">康熙年间</label>
+                    <label><input type="radio" name="dynasty" value="雍正年间">雍正年间</label>
+                    <label><input type="radio" name="dynasty" value="乾隆年间">乾隆年间</label>
+                    <label><input type="radio" name="dynasty" value="嘉庆年间">嘉庆年间</label>
+                    <label><input type="radio" name="dynasty" value="道光年间">道光年间</label>
+                    <label><input type="radio" name="dynasty" value="咸丰年间">咸丰年间</label>
+                    <label><input type="radio" name="dynasty" value="同治年间">同治年间</label>
+                    <label><input type="radio" name="dynasty" value="光绪年间">光绪年间</label>
+                    <label><input type="radio" name="dynasty" value="宣统年间">宣统年间</label>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label>思想流派：</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="thoughts" value="">全部</label>
+                    <label><input type="radio" name="thoughts" value="儒家">儒家</label>
+                    <label><input type="radio" name="thoughts" value="道家">道家</label>
+                    <label><input type="radio" name="thoughts" value="法家">法家</label>
+                    <label><input type="radio" name="thoughts" value="墨家">墨家</label>
+                    <label><input type="radio" name="thoughts" value="兵家">兵家</label>
+                    <label><input type="radio" name="thoughts" value="农家">农家</label>
+                    <label><input type="radio" name="thoughts" value="杂家">杂家</label>
+                    <label><input type="radio" name="thoughts" value="阴阳家">阴阳家</label>
+                    <label><input type="radio" name="thoughts" value="纵横家">纵横家</label>
+                    <label><input type="radio" name="thoughts" value="其他">其他</label>
+                </div>
+            </div>
+            <button type="submit">筛选</button>
+        </form>
+
+        <!-- 显示所有历史人物的卡片 -->
+        <h2>所有历史人物</h2>
+        <div class="card-container">
+            {% for row in persons %}
+            <div class="card">
+                <div class="card-content">
+                    <h3 class="card-title">{{ row['姓名'] }}</h3>
+                    <p class="card-text">别名：{{ row['别名'] }}</p>
+                    <p class="card-text">性别：{{ row['性别'] }}</p>
+                    <p class="card-text">朝代：{{ row['朝代'] }}</p>
+                    <p class="card-text">地理背景：{{ row['地理背景'] }}</p>
+                    <p class="card-text">思想流派：{{ row['思想流派'] }}</p>
+                    <p class="card-text">重要事件：{{ row['重要事件'] }}</p>
+                    <p class="card-text">主要领域：{{ row['主要领域'] }}</p>
+                    <p class="card-text">社会关系：{{ row['社会关系'] }}</p>
+                    <p class="card-text">备注：{{ row['备注'] }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

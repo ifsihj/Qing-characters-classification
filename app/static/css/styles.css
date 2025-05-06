@@ -1,0 +1,366 @@
+/* 基本样式重置 */
+body, h1, h2, h3, form, table {
+    margin: 0;
+    padding: 0;
+    font-family: 'SimHei', 'Arial', sans-serif; /* 使用黑体或Arial */
+    font-size: 18px; /* 增大默认字体大小 */
+}
+
+body {
+    background: url('\\static\\images\\background.jpg') no-repeat center center fixed; /* 添加背景图片 */
+    background-size: cover; /* 使背景图片覆盖整个页面 */
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1500px;
+    margin: auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    color: #333;
+    padding: 20px 0;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 42px;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    margin-top: 15px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+    transform: scale(1.1);
+}
+
+/* 搜索框和筛选框样式 */
+form {
+    margin: 20px 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+form input[type="text"], form select {
+    width: 65%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+form input[type="text"]:focus, form select:focus {
+    outline: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+form button {
+    padding: 15px 30px;
+    background: linear-gradient(90deg, #f5f7fa 0%, #e8f0f3 100%);
+    color: #333;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 表格样式 */
+table {
+    width: 100%;
+    margin: 30px 0;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 20px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+table th {
+    background: linear-gradient(90deg, #f5f7fa 0%, #e8f0f3 100%);
+    color: #333;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+    font-size: 22px;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #1a2a6c;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 32px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    form input[type="text"], form select {
+        font-size: 16px;
+    }
+
+    form button {
+        font-size: 16px;
+    }
+
+    table th, table td {
+        padding: 15px;
+        font-size: 16px;
+    }
+}
+
+/* 水平排列筛选框 */
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter-container .form-group {
+    margin-right: 20px;
+}
+
+.filter-container .form-group:last-child {
+    margin-right: 0;
+}
+
+/* 单选按钮样式 */
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.filter-group label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* 卡片容器样式 */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+/* 卡片样式 */
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* 卡片容器样式 */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+/* 卡片样式 */
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* 卡片内容样式 */
+.card-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.4em;
+    margin-top: 0;
+    color: #333;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1em;
+    margin: 10px 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .card-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 筛选器整体区域 */
+.filter-group {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+/* 分类标题 */
+.filter-group .form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* 下拉框统一风格 */
+.filter-group select.form-select {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 10px 15px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    height: calc(2.5em + 0.75rem); /* Bootstrap 默认高度 */
+}
+
+/* 鼠标悬停和聚焦效果 */
+.filter-group select.form-select:hover,
+.filter-group select.form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+/* 重置按钮样式 */
+.filter-group .btn-outline-secondary {
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.filter-group .btn-outline-secondary:hover {
+    background-color: #e2e6ea;
+    color: #212529;
+}
+
+/* 响应式布局优化 */
+@media (max-width: 768px) {
+    .row.g-3 .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .filter-group .btn-outline-secondary {
+        width: 100%;
+    }
+}
+
+.container h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
